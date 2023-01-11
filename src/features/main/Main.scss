@@ -1,0 +1,28 @@
+.movie__card {
+  flex: 20%;
+  position: relative;
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-details {
+    display: none;
+    position: absolute;
+    background: white;
+    top: 0;
+    left: 0;
+  }
+
+  &--active {
+    .movie__card-details {
+      display: block;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

@@ -1,5 +1,5 @@
 export interface Movie {
-  poster_path: string,
+  poster_path: string | null,
   adult: boolean,
   overview: string,
   release_date: string, // date
@@ -8,7 +8,7 @@ export interface Movie {
   original_title: string,
   original_language: string,
   title: string,
-  backdrop_path: string,
+  backdrop_path: string | null,
   popularity: number, // decimal
   vote_count: number,
   video: boolean,
