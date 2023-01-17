@@ -13,8 +13,16 @@ export function Main() {
     .then(res => setNowPlaying(res.results))
   }, [])
 
-  const handleMouseClick = (e: React.MouseEvent) => {
-    console.log(e.target);
+  const handleSliderClick = (e: React.MouseEvent) => {
+    const slider = (e.target as HTMLElement).closest(".movie-cards__container")?.querySelector(".movie-cards__slider");
+    if (slider) {
+      const sliderIndex = parseInt(window.getComputedStyle(slider).getPropertyValue("--slider-index"));
+      if ((e.target as HTMLElement).classList.contains("movie-cards__scroll--left")) {
+        (slider as HTMLElement).style.setProperty("--slider-index", (sliderIndex - 1).toString());
+      } else {
+        (slider as HTMLElement).style.setProperty("--slider-index", (sliderIndex + 1).toString());
+      }
+    }
   }
 
   return (
@@ -22,7 +30,7 @@ export function Main() {
       <h2>Main</h2>
       <h3 className="movie-category__header">Now In Theaters</h3>
       <div className="movie-cards__container">
-        <div className="movie-cards__scroll movie-cards__scroll--left" onClick={handleMouseClick}>LEFT</div>
+        <div className="movie-cards__scroll movie-cards__scroll--left" onClick={handleSliderClick}>LEFT</div>
         <div className="movie-cards__slider">
           { 
             nowPlaying.map((item: Movie, i: number) => 
@@ -48,7 +56,7 @@ export function Main() {
               </div>)
           }
         </div>
-        <div className="movie-cards__scroll movie-cards__scroll--right" onClick={handleMouseClick}>right</div>
+        <div className="movie-cards__scroll movie-cards__scroll--right" onClick={handleSliderClick}>right</div>
       </div>
     </div>
   )

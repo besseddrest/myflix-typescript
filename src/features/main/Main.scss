@@ -17,9 +17,11 @@
   }
 
   &__slider {
+    --slider-index: 0;
     width: 100%;
     display: flex;
-    transform: translateX(-00%);
+    transform: translateX(calc(var(--slider-index) * -100%));
+    transition: transform 350ms ease-in-out;
   }
 
   &__scroll {
