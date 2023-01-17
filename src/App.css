@@ -37,17 +37,3 @@
     transform: translateY(0px);
   }
 }
-
-.movie__card-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.movie__card {
-  flex: 20%;
-}
-
-.movie__card img {
-  width: 100%;
-  height: auto;
-}
