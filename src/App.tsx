@@ -8,17 +8,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Routes>
-          <Route path="/">
-            <Route path="profile" element={<Profile />}></Route>
-            <Route path="main" element={<Main />}></Route>
-          </Route>
-        </Routes>
-        <ul>
+        <h1>MyFlix</h1>
+        <ul className="app-menu">
           <li><Link to="/main">Main</Link></li>
           <li><Link to="/profile">Profile</Link></li>
         </ul>
       </header>
+      <Routes>
+        <Route path="/">
+          <Route path="profile" element={<Profile />}></Route>
+          <Route path="main" element={<Main />}></Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

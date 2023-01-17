@@ -20,7 +20,6 @@ export function Main() {
 
   return (
     <div className="movie-cards__wrapper">
-      <h2>MyFlix</h2>
       <div className="movie-cards__group-container">
         <div className="movie-cards__header">
           <h3 className="movie-cards__category">Now In Theaters</h3>
