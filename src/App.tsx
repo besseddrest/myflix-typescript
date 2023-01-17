@@ -14,9 +14,6 @@ function App() {
             <Route path="main" element={<Main />}></Route>
           </Route>
         </Routes>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
         <ul>
           <li><Link to="/main">Main</Link></li>
           <li><Link to="/profile">Profile</Link></li>
