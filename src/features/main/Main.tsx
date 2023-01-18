@@ -30,7 +30,7 @@ export function Main() {
           </div>
         </div>
         <div className="movie-cards__slider-container">
-          <div className="movie-cards__scroll movie-cards__scroll--left" onClick={handleSliderClick}>&lsaquo;</div>
+          <div className="movie-cards__scroll movie-cards__scroll--left" onClick={(event) => handleSliderClick(event, pageCount)}>&lsaquo;</div>
           <div className="movie-cards__slider">
             { 
               nowPlaying.map((item: Movie, i: number) => 
@@ -56,7 +56,7 @@ export function Main() {
                 </div>)
             }
           </div>
-          <div className="movie-cards__scroll movie-cards__scroll--right" onClick={handleSliderClick}>&rsaquo;</div>
+          <div className="movie-cards__scroll movie-cards__scroll--right" onClick={(event) => handleSliderClick(event, pageCount)}>&rsaquo;</div>
         </div> 
       </div>
       

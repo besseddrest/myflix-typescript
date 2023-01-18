@@ -1,14 +1,14 @@
 import React from "react";
 
-export const handleSliderClick = (e: React.MouseEvent) => {
+export const handleSliderClick = (e: React.MouseEvent, pageCount: number) => {
   const target = e.target as HTMLElement;
   const slider = target.closest(".movie-cards__group-container")?.querySelector(".movie-cards__slider");
   if (slider) {
     let sliderIndex = parseInt(window.getComputedStyle(slider).getPropertyValue("--slider-index"));
     if (target.classList.contains("movie-cards__scroll--left")) {
-      sliderIndex = sliderIndex - 1;
+      sliderIndex = (sliderIndex == 0) ? sliderIndex = pageCount - 1 : sliderIndex - 1;
     } else {
-      sliderIndex = sliderIndex + 1;
+      sliderIndex = (sliderIndex == pageCount - 1) ? sliderIndex = 0 : sliderIndex = sliderIndex + 1;
     }
     (slider as HTMLElement).style.setProperty("--slider-index", (sliderIndex).toString());
 
@@ -21,7 +21,7 @@ export const handleSliderClick = (e: React.MouseEvent) => {
   }
 }
 
-export const handlePageClick = (e: React.MouseEvent<HTMLDivElement>) => {
+export const handlePageClick = (e: React.MouseEvent) => {
   const target = e.target as HTMLElement;
   const clickedItemIndex = target.getAttribute('data-page-key');
   if (clickedItemIndex) {
