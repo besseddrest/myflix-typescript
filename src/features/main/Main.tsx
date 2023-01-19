@@ -1,19 +1,21 @@
 import { render } from '@testing-library/react';
 import React, { useState, useEffect, ReactText } from 'react';
 import { Movie } from '../../types/Movie';
+import { MovieLists } from '../../types/MovieLists';
 import './Main.scss';
 import { handlePageClick, handleSliderClick } from './MainUtils';
 
 export function Main() {
-  const [nowPlaying, setNowPlaying] = useState([]);
+  const [movieLists, setMovieLists] = useState<MovieLists>();
   const [pageCount, setPageCount] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
   useEffect(() => {
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
     .then(response => response.json())
     .then(res => {
-      setNowPlaying(res.results);
+      setMovieLists(prev => ({
+        ...prev,
+        now_playing: res.results
+      }));
       setPageCount(res.results.length / 4)
     })
   }, [])
@@ -33,16 +35,8 @@ export function Main() {
           <div className="movie-cards__scroll movie-cards__scroll--left" onClick={(event) => handleSliderClick(event, pageCount)}>&lsaquo;</div>
           <div className="movie-cards__slider">
             { 
-              nowPlaying.map((item: Movie, i: number) => 
-                <div key={i} className={(i == activeIndex && isActive) ? "movie-card movie-card--active" : "movie-card"} 
-                  onMouseOver={() => {
-                    setActiveIndex(i);
-                    setIsActive(true);
-                  }} 
-                  onMouseOut={() => {
-                    setActiveIndex(-1);
-                    setIsActive(false);                
-                  }}>
+              movieLists?.now_playing.map((item: Movie, i: number) => 
+                <div key={i} className="movie-card">
                   <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} alt={"Poster for " + item.title}/>
                   <div className="movie-card__details">
                     <p>Preview here</p>
