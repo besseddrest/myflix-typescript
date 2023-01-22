@@ -62,7 +62,11 @@ export function Main() {
                     <p>Preview here</p>
                     <div className="movie-card__info">
                       <h4>{item.title}</h4>
-                      <p>description goes here</p>
+                      <ul>
+                        <li>Popularity: {item.popularity}</li>
+                        <li>Vote Count: {item.vote_count}</li>
+                        <li>Vote Avg: {item.vote_average}</li>
+                      </ul>
                     </div>
                   </div>
                 </div>)
