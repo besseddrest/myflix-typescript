@@ -21,6 +21,12 @@ export function Main() {
         setPageCount(res.results.length / 4)
       });
 
+    // fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US')
+    //   .then(response => response.json())
+    //   .then(res => {
+    //     setGenres(() => res.genres);
+    //   });
+      
     // idea for movie details:
     // per slider fetch for next 'page' of movies (4x) and store in state permanently,
     // slider click handler will check if id in state, and request any missing metadata
@@ -57,16 +63,24 @@ export function Main() {
             { 
               movieLists?.now_playing.map((item: Movie, i: number) => 
                 <div key={i} className="movie-card" data-movie-id={item.id}>
-                  <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} alt={"Poster for " + item.title}/>
+                  <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} alt={"Poster for " + item.title}/>
                   <div className="movie-card__details">
-                    <p>Preview here</p>
+                    {
+                      item.backdrop_path ? <img src={"https://image.tmdb.org/t/p/w500" + item.backdrop_path} alt={"Backdrop for " + item.title} /> : "No backdrop"
+                    }
                     <div className="movie-card__info">
                       <h4>{item.title}</h4>
+                      <div className="movie-card__media">
+                        <div className="movie-card__media--play">&#9658;</div>
+                        <div className="movie-card__media--add">+</div>
+                        <div className="movie-card__media--like">&#128077;</div>
+                      </div>
                       <ul>
                         <li>Popularity: {item.popularity}</li>
                         <li>Vote Count: {item.vote_count}</li>
                         <li>Vote Avg: {item.vote_average}</li>
                       </ul>
+
                     </div>
                   </div>
                 </div>)
