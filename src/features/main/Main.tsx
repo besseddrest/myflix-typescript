@@ -75,12 +75,7 @@ export function Main() {
                         <div className="movie-card__media--add">+</div>
                         <div className="movie-card__media--like">&#128077;</div>
                       </div>
-                      <ul>
-                        <li>Popularity: {item.popularity}</li>
-                        <li>Vote Count: {item.vote_count}</li>
-                        <li>Vote Avg: {item.vote_average}</li>
-                      </ul>
-
+                      <button className="movie-card__more-info">More Info</button>
                     </div>
                   </div>
                 </div>)

@@ -11,7 +11,6 @@ function App() {
         <h1>MyFlix</h1>
         <ul className="app-menu">
           <li><Link to="/browse">Browse</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
         </ul>
       </header>
       <Routes>

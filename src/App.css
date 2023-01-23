@@ -15,8 +15,8 @@
 
 .App-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   padding: 0 2rem;
 }
@@ -32,6 +32,13 @@
 
 .app-menu li {
   margin: 0 1rem;
+}
+
+.app-menu li a:link, 
+.app-menu li a:visited,
+.app-menu li a:hover,
+.app-menu li a:active {
+  color: white;
 }
 
 .App-link {

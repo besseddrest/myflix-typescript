@@ -1,5 +1,5 @@
 body {
-  background: #141414;
+  background: #262626;
   color: white;
 }
 .movie-cards {
@@ -10,6 +10,12 @@ body {
 
   &__group-container {
     width: 100%;
+
+    &:hover {
+      .movie-cards__pages {
+        visibility: visible;
+      }
+    }
   }
 
   &__slider-container {
@@ -34,9 +40,9 @@ body {
     align-items: center;
     padding: 0 4rem;
 
-    &:has(+ .movie-cards__slider-container:hover) {
-      .movie-cards__pages {
-        visibility: visible;
+    a {
+      &:link, &:visited, &:hover, &:active {
+        color: white;
       }
     }
   }
@@ -47,8 +53,8 @@ body {
 
     &-item {
       width: 2rem;
-      height: 1rem;
-      background-color: rgb(45, 45, 45);
+      height: .5rem;
+      background-color: #4f4f4f;
       margin: 0 .25rem;
 
       &--active {
@@ -74,12 +80,14 @@ body {
     justify-content: center;
     font-size: 3rem;
     color: white;
-    background: rgba(61, 26, 132, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 100;
+    transition: font-size 100ms ease;
 
     &:hover {
-      background: rgba(26, 132, 38, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       cursor: pointer;
+      font-size: 6rem;
     }
 
     &--left {
@@ -104,15 +112,18 @@ body {
   &__details {
     position: absolute;
     background: #141414;
+    border-radius: 1rem;
+    overflow: hidden;
     color: white;
-    top: -2em;
-    bottom: -2em;
-    left: -2em;
-    right: -2em;
     margin: 0 auto;
+    padding-bottom: 1rem;
     transform: scale(0);
     text-align: left;
     z-index: 101;
+
+    > img {
+      max-width: 100%;
+    }
   }
 
   &:hover {
@@ -122,10 +133,15 @@ body {
     }
   }
 
+  &__info {
+    padding: 0 1em;
+  }
+
   &__media {
     display: flex;
     align-items: center;
     justify-items: center;
+    margin-bottom: 1rem;
 
     > div {
       display: flex;
@@ -138,20 +154,25 @@ body {
       margin-right: 10px;
       border: 2px solid white;
       border-radius: 50%;
+      line-height: normal;
+    }
+
+    &--add {
+      font-size: 2rem;
     }
 
     &--like {
-      font-size: .5em;
+      font-size: 1rem;
     }
   }
 
-  img {
+  > img {
     transform: scale(0.98);
     max-width: 100%;
     max-height: 100%;
   }
 
-  ul li {
-    text-align: left;
+  &__more-info {
+
   }
 }

@@ -1,19 +1,13 @@
 # MyFlix, a Netflix-ish personal project
 This project was created as a way to sharpen my React/Typescript skills. The goal here is to mimic the Netflix experience, with a few minor differences which are determined by the free API that I'm using: https://www.themoviedb.org/
 
-## TMDB Gotchas
-Some of the decisions I've made based on tmdb's API:
-- by default will return 20 movie titles per category
-- To gather all the metadata to match what is displayed in Netflix (when a title is hovered) would require multiple API calls PER TITLE. To do so for each title in the visible window per carousel in MyFlix would affect performance, so I've decided to make it so the user needs to click for more details, reducing the number of calls
-- TMDB's `poster_path` for each title is high resolution, and for now images will load a bit slower for the initial purposes of this project
-- Netflix uses an infinite carousel, this will be saved for a future improvement/feature
-
 ## Basic Info
 - React in Typescript
 - SASS
 - BEM naming convention for styles
 
 ## TODO
+- infinite carousel
 - UI styling
 - remove unused components
 - improve React Hooks usage
