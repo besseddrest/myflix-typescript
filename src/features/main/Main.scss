@@ -194,9 +194,14 @@ body {
 }
 
 .modal {
+  border-radius: 1rem;
   background: white;
-  width: 50vw;
-  height: 50vh;
+  max-width: 80%;
+  height: 80%;
+
+  img {
+    width: 100%;
+  }
 
   h3 {
     color: black;

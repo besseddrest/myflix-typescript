@@ -15,6 +15,7 @@ export function Main() {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US")
       .then(response => response.json())
       .then(res => {
+        console.log(res);
         setMovieDetails(res);
       })
   }
@@ -22,7 +23,7 @@ export function Main() {
   const handleOverlayClose = (ev: React.MouseEvent) => {
     setMovieDetails(undefined);
   }
-  
+
   useEffect(() => {
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
       .then(response => response.json())
@@ -43,8 +44,9 @@ export function Main() {
 
   return (
     <div className="movie-cards__wrapper">
-      <div className={movieDetails ? "overlay overlay--active" : "overlay"}>
+      <div onClick={handleOverlayClose} className={movieDetails ? "overlay overlay--active" : "overlay"}>
         <div className="modal">
+          <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails?.backdrop_path} alt="This Movie Alt" />
           <h3>{movieDetails?.title}</h3>
           <button onClick={handleOverlayClose}>X</button>
         </div>
