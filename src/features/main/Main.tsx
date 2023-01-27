@@ -21,8 +21,8 @@ export function Main() {
 
   const handleOverlayClose = (ev: React.MouseEvent) => {
     setMovieDetails(undefined);
-    console.log('hello world');
   }
+  
   useEffect(() => {
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
       .then(response => response.json())
