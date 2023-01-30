@@ -11,6 +11,7 @@ body {
 
   &__group-container {
     width: 100%;
+    margin-bottom: 1rem;
 
     &:hover {
       .movie-cards__pages {
@@ -194,16 +195,19 @@ body {
 }
 
 .modal {
+  text-align: left;
+  color: white;
+  position: relative;
   border-radius: 1rem;
-  background: white;
-  max-width: 80%;
+  background: #262626;
+  width: 80%;
   height: 80%;
+
+  .movie__details {
+    padding: 1rem;
+  }
 
   img {
     width: 100%;
-  }
-
-  h3 {
-    color: black;
   }
 }
