@@ -3,6 +3,27 @@ body {
   color: white;
 }
 
+.hero {
+  &__wrapper {
+    position: relative;
+  }
+
+  &__poster {
+    margin: 0 auto;
+    max-width: 95vw;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__metadata {
+    position: absolute;
+    bottom: 0;
+    left: 4rem;
+  }
+}
+
 .movie-cards {
   &__wrapper {
     width: 100%;
