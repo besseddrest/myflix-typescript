@@ -32,3 +32,11 @@ export const handlePageClick = (e: React.MouseEvent) => {
     (slider as HTMLElement).style.setProperty("--slider-index", (targetPage).toString());
   }
 }
+
+export const debounce = (fn: Function, timeout: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return function (this: any, ...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), timeout);
+  } 
+}

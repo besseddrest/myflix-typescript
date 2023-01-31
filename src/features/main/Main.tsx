@@ -6,14 +6,20 @@ import { MovieLists } from '../../types/MovieLists';
 import { PageCounts } from '../../types/PageCounts';
 import { HeroMovie } from '../../types/HeroMovie';
 import './Main.scss';
-import { handlePageClick, handleSliderClick } from './MainUtils';
+import { handlePageClick, handleSliderClick, debounce } from './MainUtils';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
   const [movieDetails, setMovieDetails] = useState<MovieDetail>();
   const [pageCounts, setPageCounts] = useState<PageCounts>({});
   const [heroMovie, setHeroMovie] = useState<HeroMovie>();
-  
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY.toString();
+    const scrollElement = document.querySelector('html');
+    (scrollElement as HTMLElement).dataset.scroll = scrollPosition;
+  }
+
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US")
       .then(response => response.json())
@@ -27,6 +33,7 @@ export function Main() {
   }
 
   useEffect(() => {
+    window.addEventListener("scroll", debounce(() => handleScroll(), 250), { passive: true });
     // fetch movie lists: "Now In Theaters", "Top Rated"
     const fetchData = async () => {
       const nowPlaying = await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
@@ -54,6 +61,10 @@ export function Main() {
     }
 
     fetchData();
+
+    return () => {
+      window.removeEventListener("scroll", debounce(() => handleScroll(), 250));
+    }
   }, [])
 
   return (
@@ -62,6 +73,11 @@ export function Main() {
         <div className="hero__poster"><img src={"https://image.tmdb.org/t/p/original" + heroMovie?.backdrop_path} alt={"Poster for " + heroMovie?.title}/></div>
         <div className="hero__metadata">
           <h2 className="hero__title">{heroMovie?.title}</h2>
+          <p>{heroMovie?.overview}</p>
+          <div className="hero__actions">
+            <button className="hero__button hero__button--play">Play</button>
+            <button className="hero__button hero__button--info">More Info</button>
+          </div>
         </div>
       </div>
       <div className="movie-cards__wrapper">

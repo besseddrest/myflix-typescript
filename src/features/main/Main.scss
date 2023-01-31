@@ -3,14 +3,29 @@ body {
   color: white;
 }
 
+.App-header {
+  background-color: none;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  transition: background-color 200ms ease-in-out;
+}
+
+html:not([data-scroll='0']) {
+  .App-header {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
 .hero {
   &__wrapper {
     position: relative;
+    z-index: 1;
   }
 
   &__poster {
     margin: 0 auto;
-    max-width: 95vw;
+    max-width: 100vw;
 
     img {
       width: 100%;
@@ -19,8 +34,19 @@ body {
 
   &__metadata {
     position: absolute;
-    bottom: 0;
+    bottom: 2rem;
     left: 4rem;
+    width: 50%;
+    text-align: left;
+  }
+
+  &__actions {
+    
+  }
+
+  &__button {
+    font-size: 1.5rem;
+    margin-right: 1rem;
   }
 }
 
