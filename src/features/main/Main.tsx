@@ -56,8 +56,8 @@ export function Main() {
       });
 
       setPageCounts({
-        now_playing: nowPlaying.length / 4,
-        top_rated: topRated.length / 4,
+        now_playing: nowPlaying.length / 5,
+        top_rated: topRated.length / 5,
       });
     }
 
@@ -79,14 +79,24 @@ export function Main() {
             <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails?.backdrop_path} alt="This Movie Alt" />
             <div className="movie__details">
               <h3>{movieDetails?.title}</h3>
-              <p>{movieDetails?.overview}</p>
-              <p>
-                {
-                  movieDetails?.genres.map((genre, i) => <span key={i}>{genre.name}, </span>)
-                }
-              </p>
+              <div className="movie__info">
+                <div><p>{movieDetails?.overview}</p></div>
+                <div>
+                  <p><strong>Genres: </strong>
+                    {
+                      movieDetails?.genres.map((genre, i) => {
+                        if (i == movieDetails.genres.length - 1) {
+                          return (<span key={i}>{genre.name}</span>)
+                        }
+                        return (<span key={i}>{genre.name}, </span>)
+                      })
+                    }
+                  </p>
+                </div>
+              </div>
+              
             </div>
-            <button onClick={handleOverlayClose}>X</button>
+            <button onClick={handleOverlayClose}>x</button>
           </div>
         </div>
         {
@@ -117,6 +127,7 @@ export function Main() {
                           }
                           <div className="movie-card__info">
                             <h4>{item.title}</h4>
+                            <div className="movie-card__popularity">Avg: {item.vote_average}</div>
                             <div className="movie-card__media">
                               <div className="movie-card__media--play">&#9658;</div>
                               <div className="movie-card__media--add">+</div>
@@ -136,4 +147,8 @@ export function Main() {
       </div>
     </div>
   )
+
+  function getPercentage(val: number) {
+    return val * 100;
+  }
 }

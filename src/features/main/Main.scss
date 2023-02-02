@@ -26,39 +26,6 @@ html:not([data-scroll='0']) {
   }
 }
 
-.hero {
-  &__wrapper {
-    position: relative;
-    z-index: 1;
-  }
-
-  &__poster {
-    margin: 0 auto;
-    max-width: 100vw;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  &__metadata {
-    position: absolute;
-    bottom: 2rem;
-    left: 4rem;
-    width: 50%;
-    text-align: left;
-  }
-
-  &__actions {
-    
-  }
-
-  &__button {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-  }
-}
-
 .movie-cards {
   &__wrapper {
     width: 100%;
@@ -138,12 +105,12 @@ html:not([data-scroll='0']) {
     justify-content: center;
     font-size: 3rem;
     color: white;
-    background: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 100;
-    transition: font-size 100ms ease;
+    transition: font-size 100ms ease, background-color 100ms ease-in-out;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.6);
       cursor: pointer;
       font-size: 6rem;
     }
@@ -163,9 +130,9 @@ html:not([data-scroll='0']) {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 25%;
-  height: 325px;
-  max-width: 25%;
+  flex: 0 0 20%;
+  height: 300px;
+  max-width: 20%;
 
   &__details {
     position: absolute;
@@ -203,24 +170,47 @@ html:not([data-scroll='0']) {
 
     > div {
       display: flex;
-      flex: 0 0 40px;
+      flex: 0 0 30px;
       text-align: center;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       margin-right: 10px;
       border: 2px solid white;
       border-radius: 50%;
       line-height: normal;
+      opacity: .8;
+      font-size: .95rem;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &--play {
+      flex: 0 0 28px;
+      max-width: 28px;
+      height: 30px;
+      border: 0;
+      padding-left: 2px;
+      font-size: 1.4rem;
+      color: black;
+      background: white;
+      opacity: 1;
+
+      &:hover {
+        opacity: .8;
+        cursor: pointer;
+      }
     }
 
     &--add {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
     &--like {
-      font-size: 1rem;
+      font-size: .8rem;
     }
   }
 
@@ -263,7 +253,38 @@ html:not([data-scroll='0']) {
     padding: 1rem;
   }
 
+  .movie__info {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      flex: 0 0 48%;
+    }
+
+    strong {
+      color: #696969;
+    }
+  }
+
   img {
     width: 100%;
+  }
+
+  button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background-color: #4f4f4f;
+    border: 0;
+    color: white;
+    width: 37px;
+    height: 37px;
+    border: 3px solid #4f4f4f;
+    border-radius: 40px;
+    
+    &:active {
+      border: 3px solid white;
+    }
   }
 }

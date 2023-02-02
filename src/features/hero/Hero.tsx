@@ -1,5 +1,6 @@
 import React from "react"
 import { HeroMovie } from "../../types/HeroMovie"
+import './Hero.scss';
 
 interface HeroMovieProps {
   heroMovieState: [HeroMovie, React.Dispatch<React.SetStateAction<HeroMovie>>]
