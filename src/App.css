@@ -22,7 +22,9 @@
 }
 
 .App-header h1 {
+  font-size: 2rem;
   text-align: left;
+  color: #e50914;
 }
 
 .app-menu {

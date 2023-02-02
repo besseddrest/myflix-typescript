@@ -7,12 +7,13 @@ import { PageCounts } from '../../types/PageCounts';
 import { HeroMovie } from '../../types/HeroMovie';
 import './Main.scss';
 import { handlePageClick, handleSliderClick, debounce } from './MainUtils';
+import { Hero } from '../hero/Hero';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
   const [movieDetails, setMovieDetails] = useState<MovieDetail>();
   const [pageCounts, setPageCounts] = useState<PageCounts>({});
-  const [heroMovie, setHeroMovie] = useState<HeroMovie>();
+  const [heroMovie, setHeroMovie] = useState<HeroMovie>(Object);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY.toString();
@@ -69,17 +70,9 @@ export function Main() {
 
   return (
     <div>
-      <div className="hero__wrapper">
-        <div className="hero__poster"><img src={"https://image.tmdb.org/t/p/original" + heroMovie?.backdrop_path} alt={"Poster for " + heroMovie?.title}/></div>
-        <div className="hero__metadata">
-          <h2 className="hero__title">{heroMovie?.title}</h2>
-          <p>{heroMovie?.overview}</p>
-          <div className="hero__actions">
-            <button className="hero__button hero__button--play">Play</button>
-            <button className="hero__button hero__button--info">More Info</button>
-          </div>
-        </div>
-      </div>
+      {
+        heroMovie ? <Hero heroMovieState={[heroMovie, setHeroMovie]} /> : null
+      }
       <div className="movie-cards__wrapper">
         <div onClick={handleOverlayClose} className={movieDetails ? "overlay overlay--active" : "overlay"}>
           <div className="modal">

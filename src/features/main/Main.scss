@@ -9,11 +9,20 @@ body {
   position: fixed;
   z-index: 2;
   transition: background-color 200ms ease-in-out;
+
+  h1 {
+    margin: .75rem 0;
+  }
+
+  .app-menu {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
 }
 
 html:not([data-scroll='0']) {
   .App-header {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
