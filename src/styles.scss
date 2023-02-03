@@ -1,0 +1,23 @@
+button.button--text {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 0;
+  box-shadow: 0;
+  padding: .5rem 1rem;
+
+  &.button--primary {
+    color: black;
+    background-color: white;
+  }
+
+  &.button--secondary {
+    color: white;
+    background-color: grey;
+  }
+
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+}

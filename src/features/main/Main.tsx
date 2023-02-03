@@ -34,7 +34,7 @@ export function Main() {
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", debounce(() => handleScroll(), 250), { passive: true });
+    window.addEventListener("scroll", debounce(() => handleScroll(), 200), { passive: true });
     // fetch movie lists: "Now In Theaters", "Top Rated"
     const fetchData = async () => {
       const nowPlaying = await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
@@ -64,7 +64,7 @@ export function Main() {
     fetchData();
 
     return () => {
-      window.removeEventListener("scroll", debounce(() => handleScroll(), 250));
+      window.removeEventListener("scroll", debounce(() => handleScroll(), 200));
     }
   }, [])
 
@@ -127,13 +127,13 @@ export function Main() {
                           }
                           <div className="movie-card__info">
                             <h4>{item.title}</h4>
-                            <div className="movie-card__popularity">Avg: {item.vote_average}</div>
+                            <div className="movie-card__popularity">Avg: {item.vote_average} { (item.runtime) ? '|' + item.runtime : ''}</div>
                             <div className="movie-card__media">
                               <div className="movie-card__media--play">&#9658;</div>
                               <div className="movie-card__media--add">+</div>
                               <div className="movie-card__media--like">&#128077;</div>
                             </div>
-                            <button className="movie-card__more-info" onClick={(event) => handleMoreInfoClick(event, item.id)}>More Info</button>
+                            <button className="movie-card__more-info button--text button--primary" onClick={(event) => handleMoreInfoClick(event, item.id)}>More Info</button>
                           </div>
                         </div>
                       </div>)

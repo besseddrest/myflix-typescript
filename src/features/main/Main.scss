@@ -131,7 +131,7 @@ html:not([data-scroll='0']) {
   align-items: center;
   justify-content: center;
   flex: 0 0 20%;
-  height: 300px;
+  max-height: 300px;
   max-width: 20%;
 
   &__details {

@@ -3,6 +3,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Main } from './features/main/Main';
 import { Profile } from './features/profile/Profile';
 import './App.css';
+import './styles.scss';
 
 function App() {
   return (
