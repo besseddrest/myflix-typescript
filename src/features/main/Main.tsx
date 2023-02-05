@@ -72,7 +72,7 @@ export function Main() {
   
   return (
     <>
-      <Hero heroMovieState={[heroMovie, setHeroMovie]} />
+      <Hero heroMovie={heroMovie} handleMoreInfoClick={(event: React.MouseEvent) => handleMoreInfoClick(event, heroMovie.id)} />
       <div className="movie-cards__wrapper">
       <Overlay handleOverlayClose={handleOverlayClose} movieDetails={movieDetails} />
         {

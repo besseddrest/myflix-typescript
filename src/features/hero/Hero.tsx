@@ -3,10 +3,12 @@ import { HeroMovie } from "../../types/HeroMovie"
 import './Hero.scss';
 
 interface HeroMovieProps {
-  heroMovieState: [HeroMovie, React.Dispatch<React.SetStateAction<HeroMovie>>]
+  heroMovie: HeroMovie,
+  handleMoreInfoClick: Function,
 }
 
-export const Hero: React.FC<HeroMovieProps> = ({heroMovieState: [heroMovie, setHeroMovie]}) => {
+export const Hero: React.FC<HeroMovieProps> = (props) => {
+  const {heroMovie, handleMoreInfoClick} = props;
   const url = "url(https://image.tmdb.org/t/p/original" + heroMovie.backdrop_path + ")";
 
   const heroImageStyle:React.CSSProperties = {
@@ -22,7 +24,7 @@ export const Hero: React.FC<HeroMovieProps> = ({heroMovieState: [heroMovie, setH
         <p>{heroMovie.overview}</p>
         <div className="hero__actions">
           <button className="hero__button hero__button--play button--text button--primary">&#9658; Play</button>
-          <button className="hero__button hero__button--info button--text button--secondary">&#9432; More Info</button>
+          <button onClick={() => handleMoreInfoClick()} className="hero__button hero__button--info button--text button--secondary">&#9432; More Info</button>
         </div>
       </div>
     </div>

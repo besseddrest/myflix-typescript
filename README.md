@@ -11,8 +11,7 @@ This project was created as a way to sharpen my React/Typescript skills. The goa
 
 ## TODO
 - infinite carousel
-- responsive styling
-- UI styling
+- tighten up styling (general/responsive)
 - remove unused components
 - improve React Hooks usage
 

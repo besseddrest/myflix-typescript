@@ -7,7 +7,7 @@ type OverlayProps = {
   movieDetails?: MovieDetail,
 }
 
-export const Overlay: React.FunctionComponent<OverlayProps> = (props) => {
+export const Overlay: React.FC<OverlayProps> = (props) => {
   const { handleOverlayClose, movieDetails } = props;
   return (<div onClick={() => handleOverlayClose()} className={movieDetails ? "overlay overlay--active" : "overlay"}>
     <div className="modal">
