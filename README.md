@@ -1,6 +1,9 @@
 # MyFlix: re-creating Netflix for fun
 This project was created as a way to sharpen my React/Typescript skills. The goal here is to mimic the Netflix experience, with a few minor differences which are determined by the free API that I'm using: https://www.themoviedb.org/
 
+## Current Progress (Screenshot)
+![MyFlix Screenshot](https://imgur.com/50ds4AG)
+
 ## Basic Info
 - React in Typescript
 - SASS
