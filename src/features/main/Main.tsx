@@ -8,6 +8,7 @@ import { HeroMovie } from '../../types/HeroMovie';
 import './Main.scss';
 import { handlePageClick, handleSliderClick, debounce } from './MainUtils';
 import { Hero } from '../hero/Hero';
+import { Overlay } from '../overlay/Overlay';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
@@ -22,13 +23,14 @@ export function Main() {
   }
 
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
-    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US")
+    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=release_dates")
       .then(response => response.json())
       .then(res => {
         setMovieDetails(res);
       })
   }
 
+  // TODO: move to Overlay component
   const handleOverlayClose = (ev: React.MouseEvent) => {
     setMovieDetails(undefined);
   }
@@ -67,38 +69,12 @@ export function Main() {
       window.removeEventListener("scroll", debounce(() => handleScroll(), 200));
     }
   }, [])
-
+  
   return (
-    <div>
-      {
-        heroMovie ? <Hero heroMovieState={[heroMovie, setHeroMovie]} /> : null
-      }
+    <>
+      <Hero heroMovieState={[heroMovie, setHeroMovie]} />
       <div className="movie-cards__wrapper">
-        <div onClick={handleOverlayClose} className={movieDetails ? "overlay overlay--active" : "overlay"}>
-          <div className="modal">
-            <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails?.backdrop_path} alt="This Movie Alt" />
-            <div className="movie__details">
-              <h3>{movieDetails?.title}</h3>
-              <div className="movie__info">
-                <div><p>{movieDetails?.overview}</p></div>
-                <div>
-                  <p><strong>Genres: </strong>
-                    {
-                      movieDetails?.genres.map((genre, i) => {
-                        if (i == movieDetails.genres.length - 1) {
-                          return (<span key={i}>{genre.name}</span>)
-                        }
-                        return (<span key={i}>{genre.name}, </span>)
-                      })
-                    }
-                  </p>
-                </div>
-              </div>
-              
-            </div>
-            <button onClick={handleOverlayClose}>x</button>
-          </div>
-        </div>
+      <Overlay handleOverlayClose={handleOverlayClose} movieDetails={movieDetails} />
         {
           Object.keys(movieLists)?.map((list, i) => 
             <div key={i} className="movie-cards__group-container">
@@ -127,7 +103,7 @@ export function Main() {
                           }
                           <div className="movie-card__info">
                             <h4>{item.title}</h4>
-                            <div className="movie-card__popularity">Avg: {item.vote_average} { (item.runtime) ? '|' + item.runtime : ''}</div>
+                            <div className="movie-card__popularity">Pop: {item.popularity}</div>
                             <div className="movie-card__media">
                               <div className="movie-card__media--play">&#9658;</div>
                               <div className="movie-card__media--add">+</div>
@@ -145,10 +121,6 @@ export function Main() {
           )
         }
       </div>
-    </div>
+    </>
   )
-
-  function getPercentage(val: number) {
-    return val * 100;
-  }
 }

@@ -6,6 +6,7 @@ export interface MovieDetail {
   }[],
   id: number,
   overview: string | null,
+  popularity: number,
   release_date: string, // format: date
   runtime: number | null,
   title: string,

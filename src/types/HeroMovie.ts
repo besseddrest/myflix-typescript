@@ -10,7 +10,6 @@ export interface HeroMovie {
   title: string,
   backdrop_path: string | null,
   popularity: number, // decimal
-  runtime: number | null,
   vote_count: number,
   video: boolean,
   vote_average: number,
