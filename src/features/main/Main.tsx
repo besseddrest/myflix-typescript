@@ -23,9 +23,14 @@ export function Main() {
   }
 
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
-    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=release_dates")
+    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates")
       .then(response => response.json())
       .then(res => {
+        const movieCast = []
+        for (let i = 0; i < 4; i++) {
+          movieCast.push(res.credits.cast[i].name);
+        }
+        res.cast = movieCast;
         setMovieDetails(res);
       })
   }

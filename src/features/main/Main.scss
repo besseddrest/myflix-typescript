@@ -91,7 +91,7 @@ html:not([data-scroll='0']) {
 
   &__slider {
     --slider-index: 0;
-    width: 100%;
+    width: calc(100% - 8rem);
     display: flex;
     transform: translateX(calc(var(--slider-index) * -100%));
     transition: transform 350ms ease-in-out;
@@ -99,7 +99,7 @@ html:not([data-scroll='0']) {
 
   &__scroll {
     visibility: hidden;
-    width: 3rem;
+    width: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,6 @@
 export interface MovieDetail {
   backdrop_path: string | null,
+  cast: string[],
   genres: {
     id: number,
     name: string,

@@ -10,10 +10,28 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
 
   &--active {
     display: flex;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background-color: #4f4f4f;
+    border: 0;
+    color: white;
+    width: 37px;
+    height: 37px;
+    border: 3px solid #4f4f4f;
+    border-radius: 40px;
+    
+    &:active {
+      border: 3px solid white;
+    }
   }
 }
 
@@ -24,7 +42,6 @@
   border-radius: 1rem;
   background: #262626;
   width: 80%;
-  height: 80%;
 
   .movie__details {
     padding: 1rem;
@@ -56,23 +73,5 @@
 
   img {
     width: 100%;
-  }
-
-  button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    background-color: #4f4f4f;
-    border: 0;
-    color: white;
-    width: 37px;
-    height: 37px;
-    border: 3px solid #4f4f4f;
-    border-radius: 40px;
-    
-    &:active {
-      border: 3px solid white;
-    }
   }
 }
