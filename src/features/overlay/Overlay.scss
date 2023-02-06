@@ -1,7 +1,7 @@
 .overlay {
   z-index: 101;
-  position: fixed;
-  display: none;
+  position: absolute;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
@@ -10,10 +10,14 @@
   bottom: 0;
   right: 0;
   left: 0;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 100ms ease, opacity 400ms ease;
   background-color: rgba(0, 0, 0, 0.5);
-
+  
   &--active {
-    display: flex;
+    opacity: 1;
+    transform: scale(1);
   }
 
   &__close {
