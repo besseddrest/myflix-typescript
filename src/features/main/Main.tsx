@@ -26,6 +26,7 @@ export function Main() {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates")
       .then(response => response.json())
       .then(res => {
+        console.log(res);
         const movieCast = []
         for (let i = 0; i < 4; i++) {
           movieCast.push(res.credits.cast[i].name);
@@ -108,11 +109,11 @@ export function Main() {
                           }
                           <div className="movie-card__info">
                             <h4>{item.title}</h4>
-                            <div className="movie-card__popularity">Pop: {item.popularity}</div>
-                            <div className="movie-card__media">
-                              <div className="movie-card__media--play">&#9658;</div>
-                              <div className="movie-card__media--add">+</div>
-                              <div className="movie-card__media--like">&#128077;</div>
+                            <div className="movie-card__score">Score: {item.popularity}</div>
+                            <div className="movie-card__actions">
+                              <button className="button--icon button--icon-light">&#9658;</button>
+                              <button className="button--icon">&#65291;</button>
+                              <button className="button--icon">&#128077;</button>
                             </div>
                             <button className="movie-card__more-info button--text button--primary" onClick={(event) => handleMoreInfoClick(event, item.id)}>More Info</button>
                           </div>

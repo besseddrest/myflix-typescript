@@ -162,11 +162,16 @@ html:not([data-scroll='0']) {
     padding: 0 1em;
   }
 
-  &__media {
+  &__score {
+    color: greenyellow;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__actions {
     display: flex;
     align-items: center;
     justify-items: center;
-    margin-bottom: 1rem;
 
     > div {
       display: flex;
