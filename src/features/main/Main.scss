@@ -30,6 +30,7 @@ html:not([data-scroll='0']) {
   &__wrapper {
     width: 100%;
     overflow-x: hidden;
+    padding-bottom: 5rem;
   }
 
   &__group-container {
