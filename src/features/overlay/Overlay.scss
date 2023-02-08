@@ -1,11 +1,12 @@
 .overlay {
-  z-index: 101;
+  z-index: 3;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  padding-top: 2rem;
   top: 0;
   bottom: 0;
   right: 0;
@@ -14,6 +15,7 @@
   transform: scale(0);
   transition: transform 100ms ease, opacity 400ms ease;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
   
   &--active {
     opacity: 1;
@@ -33,11 +35,13 @@
 }
 
 .modal {
+  z-index: 4;
+  margin: auto;
   text-align: left;
   color: white;
   position: relative;
   border-radius: 1rem;
-  background: #262626;
+  background: black;
   width: 80%;
 
   .movie__details {
@@ -75,5 +79,29 @@
 
   img {
     width: 100%;
+  }
+}
+
+.similar__wrap {
+  display: flex;
+  flex-wrap: wrap;
+
+  .movie-card {
+    display: block;
+    margin: 0 1rem 1rem;
+    flex: 0 0 calc(33% - 2rem);
+    max-width: calc(33% - 2rem);
+    max-height: 300px;
+    background: #262626;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    &__description {
+      padding: 0 1.5rem 1.5rem;
+    }
+  }
+
+  .movie-card__meta {
+    display: flex;
   }
 }

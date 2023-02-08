@@ -1,6 +1,7 @@
 import { MovieDetail } from '../../types/MovieDetail';
 import { getYear } from './OverlayUtils';
 import './Overlay.scss';
+import React from 'react';
 
 type OverlayProps = {
   handleOverlayClose: Function,
@@ -15,11 +16,17 @@ const formatRuntime = (runtime: number | null) => {
   }
 }
 
+const handleMoreClick = (ev: React.MouseEvent) => {
+  ev.preventDefault();
+  const section = document.querySelector(".movie__about");
+  (section as HTMLElement).scrollIntoView({behavior: 'smooth'})
+}
+
 export const Overlay: React.FC<OverlayProps> = (props) => {
   const { handleOverlayClose, movieDetails } = props;
-  return (<div onClick={() => handleOverlayClose()} className={movieDetails ? "overlay overlay--active" : "overlay"}>
+  return (<div onClick={(event) => handleOverlayClose(event)} className={movieDetails ? "overlay overlay--active" : "overlay"}>
     <div className="modal">
-      <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails?.backdrop_path} alt="This Movie Alt" />
+      { movieDetails?.backdrop_path && <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails.backdrop_path} alt="This Movie Alt" /> }
       {movieDetails && <div className="movie__details">
         <h3>{movieDetails.title}</h3>
         <div className="movie__actions">
@@ -35,7 +42,7 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
               {movieDetails.cast.map((name, i) => <span key={i}>{name}{
                 (i < movieDetails.cast.length - 1) 
                   ? ', ' 
-                  : <span>&nbsp;<a>more...</a></span>}</span>
+                  : <span>&nbsp;<a href="#" onClick={(event) => handleMoreClick(event)}>more...</a></span>}</span>
                 )
               }
             </p>
@@ -44,14 +51,40 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
             </p>
           </div>
         </div>
-        <div>
+        <div className="movie__similar">
+          <h4>More Like This</h4>
+          <div className="similar__wrap">
+            {
+              movieDetails.similar.map((similarItem, i) => {
+                if (similarItem.backdrop_path) {
+                  return (
+                    <div key={i} className="movie-card">
+                      <img src={"https://image.tmdb.org/t/p/w500" + similarItem.backdrop_path} alt={"Backdrop for " + similarItem.title} />
+                      <h5>{ similarItem.title }</h5>
+                      <div className="movie-card__meta">
+                        { getYear(similarItem.release_date) }
+                        <button className="button--icon">&#65291;</button>
+                      </div>
+                      <div className="movie-card__description">
+                        {similarItem.overview}
+                      </div>
+                    </div>
+                  )
+                }
+              }
+                
+              )
+            }
+          </div>
+        </div>
+        <div className="movie__about">
           <h4>About {movieDetails.title}</h4>
           <p>
             about info here
           </p>
         </div>
       </div>}
-      <button className="button--icon-close button--icon" onClick={() => handleOverlayClose()}>&#10006;</button>
+      <button className="button--icon-close button--icon" onClick={(event) => handleOverlayClose(event)}>&#10006;</button>
     </div>
   </div>);
   }

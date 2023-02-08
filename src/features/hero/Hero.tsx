@@ -9,8 +9,13 @@ interface HeroMovieProps {
 
 export const Hero: React.FC<HeroMovieProps> = (props) => {
   const {heroMovie, handleMoreInfoClick} = props;
-  const url = "url(https://image.tmdb.org/t/p/original" + heroMovie.backdrop_path + ")";
-
+  let url;
+  if (heroMovie.backdrop_path) {
+    url = "url(https://image.tmdb.org/t/p/original" + heroMovie.backdrop_path + ")";
+  } else {
+    url = 'none';
+  }
+  
   const heroImageStyle:React.CSSProperties = {
     backgroundImage: url,
     backgroundSize: "cover"

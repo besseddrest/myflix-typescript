@@ -23,22 +23,34 @@ export function Main() {
   }
 
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
-    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates")
+    fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates,similar")
       .then(response => response.json())
       .then(res => {
-        console.log(res);
+        const similar = res.similar.results;
+        res.similar = similar;
         const movieCast = []
         for (let i = 0; i < 4; i++) {
           movieCast.push(res.credits.cast[i].name);
         }
         res.cast = movieCast;
         setMovieDetails(res);
+        const body = document.querySelector("body");
+        (body as HTMLElement).style.setProperty("overflow", "hidden");
       })
   }
 
   // TODO: move to Overlay component
   const handleOverlayClose = (ev: React.MouseEvent) => {
-    setMovieDetails(undefined);
+    const target = (ev.target as HTMLElement);
+    const isCloseElement = (target.classList.contains("overlay") || target.classList.contains("button--icon-close"))
+      ? true
+      : false;
+
+    if (isCloseElement) {
+      setMovieDetails(undefined);
+      const body = document.querySelector("body");
+      (body as HTMLElement).style.setProperty("overflow", "visible");
+    }
   }
 
   useEffect(() => {
@@ -78,9 +90,9 @@ export function Main() {
   
   return (
     <>
+      <Overlay handleOverlayClose={handleOverlayClose} movieDetails={movieDetails} />
       <Hero heroMovie={heroMovie} handleMoreInfoClick={(event: React.MouseEvent) => handleMoreInfoClick(event, heroMovie.id)} />
       <div className="movie-cards__wrapper">
-      <Overlay handleOverlayClose={handleOverlayClose} movieDetails={movieDetails} />
         {
           Object.keys(movieLists)?.map((list, i) => 
             <div key={i} className="movie-cards__group-container">

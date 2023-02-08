@@ -10,6 +10,14 @@ export interface MovieDetail {
   popularity: number,
   release_date: string, // format: date
   runtime: number | null,
+  similar: {
+    backdrop_path: string | null,
+    id: number,
+    title: string,
+    overview: string | null,
+    release_date: string,
+    runtime: number,
+  }[],
   title: string,
   video: boolean,
   vote_average: number,
