@@ -1,8 +1,14 @@
 # MyFlix: re-creating Netflix (WIP)
 This project was created as a way to sharpen my React/Typescript skills. The goal here is to mimic the Netflix experience, with a few minor differences which are determined by the free API that I'm using: https://www.themoviedb.org/
 
-## Current Progress (Screenshot)
+## Current Progress (Screenshots)
 ![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/screenshot_2023_2_4.png?raw=true)
+
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_card_hover.png?raw=true)
+
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_more_info_click.png?raw=true)
+
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_more_like_this.png?raw=true)
 
 ## Basic Info
 - React in Typescript

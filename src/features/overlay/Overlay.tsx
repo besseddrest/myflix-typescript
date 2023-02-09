@@ -22,6 +22,10 @@ const handleMoreClick = (ev: React.MouseEvent) => {
   (section as HTMLElement).scrollIntoView({behavior: 'smooth'})
 }
 
+const trimOverview = (overview: string) => {
+  return overview.substring(0, 80) + "...";
+}
+
 export const Overlay: React.FC<OverlayProps> = (props) => {
   const { handleOverlayClose, movieDetails } = props;
   return (<div onClick={(event) => handleOverlayClose(event)} className={movieDetails ? "overlay overlay--active" : "overlay"}>
@@ -51,22 +55,33 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
             </p>
           </div>
         </div>
-        <div className="movie__similar">
+        <div className="similar-movies">
           <h4>More Like This</h4>
-          <div className="similar__wrap">
+          <div className="similar-movies__wrap">
             {
               movieDetails.similar.map((similarItem, i) => {
                 if (similarItem.backdrop_path) {
                   return (
-                    <div key={i} className="movie-card">
-                      <img src={"https://image.tmdb.org/t/p/w500" + similarItem.backdrop_path} alt={"Backdrop for " + similarItem.title} />
-                      <h5>{ similarItem.title }</h5>
-                      <div className="movie-card__meta">
-                        { getYear(similarItem.release_date) }
-                        <button className="button--icon">&#65291;</button>
+                    <div key={i} className="similar-movie">
+                      <div className="similar-movie__backdrop">
+                        <button className="button--icon">&#9658;</button>
+                        <img src={"https://image.tmdb.org/t/p/w500" + similarItem.backdrop_path} alt={"Backdrop for " + similarItem.title} />
                       </div>
-                      <div className="movie-card__description">
-                        {similarItem.overview}
+                      <div className="similar-movie__info">
+                        <h5>{ similarItem.title }</h5>
+                        <div className="similar-movie__meta">
+                          <div>
+                            <strong>Score: { similarItem.popularity }</strong>
+                            { getYear(similarItem.release_date) }
+                          </div>
+                          <div>
+                            <button className="button--icon">&#65291;</button>
+                          </div>
+                        </div>
+                        <div className="similar-movie__description">
+                          { similarItem.overview && trimOverview(similarItem.overview) }
+                        </div>
+
                       </div>
                     </div>
                   )

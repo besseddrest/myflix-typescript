@@ -36,6 +36,10 @@ export function Main() {
         setMovieDetails(res);
         const body = document.querySelector("body");
         (body as HTMLElement).style.setProperty("overflow", "hidden");
+        const modal = document.querySelector(".modal");
+        setTimeout(() => {
+          (modal as HTMLElement).classList.add("modal--active");
+        }, 200);
       })
   }
 
@@ -48,8 +52,11 @@ export function Main() {
 
     if (isCloseElement) {
       setMovieDetails(undefined);
-      const body = document.querySelector("body");
-      (body as HTMLElement).style.setProperty("overflow", "visible");
+      const modal = document.querySelector(".modal");
+      (modal as HTMLElement).classList.remove("modal--active");
+
+        const body = document.querySelector("body");
+        (body as HTMLElement).style.setProperty("overflow", "visible");
     }
   }
 
