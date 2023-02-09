@@ -4,11 +4,11 @@ This project was created as a way to sharpen my React/Typescript skills. The goa
 ## Current Progress (Screenshots)
 ![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/screenshot_2023_2_4.png?raw=true)
 
-![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_card_hover.png?raw=true)
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/src/img/ss_card_hover.png?raw=true)
 
-![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_more_info_click.png?raw=true)
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/src/img/ss_more_info_click.png?raw=true)
 
-![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/img/ss_more_like_this.png?raw=true)
+![MyFlix Screenshot](https://github.com/besseddrest/myflix-typescript/blob/master/src/img/ss_more_like_this.png?raw=true)
 
 ## Basic Info
 - React in Typescript
