@@ -10,6 +10,7 @@ export interface MovieDetail {
   id: number,
   overview: string | null,
   popularity: number,
+  rating: string | null,
   release_date: string, // format: date
   runtime: number | null,
   similar: {

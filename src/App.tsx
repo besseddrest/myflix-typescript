@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom"; 
 import { Main } from './features/main/Main';
-import { Profile } from './features/profile/Profile';
+import { Profiles } from './features/profiles/Profiles';
 import './App.css';
 import './styles.scss';
 
@@ -16,7 +16,7 @@ function App() {
       </header>
       <Routes>
         <Route path="/">
-          <Route path="profile" element={<Profile />}></Route>
+          <Route path="/" element={<Profiles />}></Route>
           <Route path="browse" element={<Main />}></Route>
         </Route>
       </Routes>

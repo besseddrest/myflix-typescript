@@ -3,8 +3,8 @@ export const trimMovieDetailResponse = (res: any) => {
   const cast = []
   let director: string = '';
   let writers: string[] = [];
+  let rating: string = '';
 
-  console.log(res.credits.crew);  
   // similar movies
   response.similar = res.similar.results;
 
@@ -23,7 +23,6 @@ export const trimMovieDetailResponse = (res: any) => {
     }
 
     if (member.job == 'Screenplay' || member.job == 'Co-Writer') {
-      console.log(member.name);
       writers.push(member.name);
     }
 
@@ -31,7 +30,17 @@ export const trimMovieDetailResponse = (res: any) => {
       break;
     }
   }
-  response.director = director;
+  
+  for (let i = 0; i < res.release_dates.results.length; i++) {
+    const entry = res.release_dates.results[i];
+    if (entry.iso_3166_1 == 'US' && entry.release_dates.length > 0) {
+      console.log(entry);
+      rating = entry.release_dates[0].certification;
+      break;
+    }
+  }
+  response.rating = rating;
+  response.director = director != '' ? director : 'N/A';
   response.writers = writers;
 
   return response;

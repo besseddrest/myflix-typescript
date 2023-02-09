@@ -59,6 +59,18 @@
     opacity: 1;
   }
 
+  .modal__hero {
+    position: relative;
+
+    h3 {
+      position: absolute;
+      margin-bottom: 0;
+      bottom: 1rem;
+      left: 1rem;
+      text-shadow: 1px 1px 3px black;
+    }
+  }
+
   .movie__sidebar {
     a {
       color: grey;
@@ -158,6 +170,10 @@
           opacity: .9;
         }
       }
+    }
+
+    &__description {
+      font-size: 12px;
     }
 
     &__info {

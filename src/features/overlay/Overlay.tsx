@@ -23,22 +23,29 @@ const handleMoreClick = (ev: React.MouseEvent) => {
 }
 
 const trimOverview = (overview: string) => {
-  return overview.substring(0, 80) + "...";
+  return overview.substring(0, 120) + "...";
 }
 
 export const Overlay: React.FC<OverlayProps> = (props) => {
   const { handleOverlayClose, movieDetails } = props;
   return (<div onClick={(event) => handleOverlayClose(event)} className={movieDetails ? "overlay overlay--active" : "overlay"}>
     <div className="modal">
+      <div className="modal__hero">
       { movieDetails?.backdrop_path && <img src={"https://image.tmdb.org/t/p/w1280" + movieDetails.backdrop_path} alt="This Movie Alt" /> }
+      <h3>{ movieDetails?.title }</h3>
+      </div>
       {movieDetails && <div className="movie__details">
-        <h3>{movieDetails.title}</h3>
         <div className="movie__actions">
           <button className="button--text">&#9658; Play</button>
           <button className="button--icon">&#65291;</button>
           <button className="button--icon">&#128077;</button>
         </div>
-        <div className="movie__ratings"><strong>Score: {movieDetails.popularity}</strong> &#x2022; {getYear(movieDetails.release_date)} &#x2022; Avg: {movieDetails.vote_average} &#x2022; {formatRuntime(movieDetails.runtime)}</div>
+        <div className="movie__ratings">
+          <strong>Score: {movieDetails.popularity}</strong> &#x2022;&nbsp;
+          {getYear(movieDetails.release_date)} &#x2022;&nbsp;
+          <span>{ movieDetails.rating }</span> &#x2022;&nbsp;
+          Avg: {movieDetails.vote_average} &#x2022;&nbsp;
+          {formatRuntime(movieDetails.runtime)}</div>
         <div className="movie__info">
           <div><p>{movieDetails.overview}</p></div>
           <div className="movie__sidebar">
@@ -79,7 +86,7 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
                           </div>
                         </div>
                         <div className="similar-movie__description">
-                          { similarItem.overview && trimOverview(similarItem.overview) }
+                          { similarItem.overview }
                         </div>
 
                       </div>
@@ -99,7 +106,7 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
           <p><span>Writer(s):</span> { movieDetails.writers.map((item) => item + ", ") }</p>
           <p><span>Genres:</span> { movieDetails.genres.map((genre) => genre.name + ', ') }</p>
           {/* <p><span>Adjectives:</span> </p> */}
-          {/* <p><span>Maturity Rating:</span> </p> */}
+          <p><span>Maturity Rating:</span> { movieDetails.rating }</p>
         </div>
       </div>}
       <button className="button--icon-close button--icon" onClick={(event) => handleOverlayClose(event)}>&#10006;</button>
