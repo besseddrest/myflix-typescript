@@ -41,10 +41,10 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
         <div className="movie__ratings"><strong>Score: {movieDetails.popularity}</strong> &#x2022; {getYear(movieDetails.release_date)} &#x2022; Avg: {movieDetails.vote_average} &#x2022; {formatRuntime(movieDetails.runtime)}</div>
         <div className="movie__info">
           <div><p>{movieDetails.overview}</p></div>
-          <div className="movie_sidebar">
+          <div className="movie__sidebar">
             <p><strong>Cast: </strong>
-              {movieDetails.cast.map((name, i) => <span key={i}>{name}{
-                (i < movieDetails.cast.length - 1) 
+              {movieDetails.cast.slice(0, 4).map((name, i) => <span key={i}>{name}{
+                (i < 3) 
                   ? ', ' 
                   : <span>&nbsp;<a href="#" onClick={(event) => handleMoreClick(event)}>more...</a></span>}</span>
                 )
@@ -94,9 +94,12 @@ export const Overlay: React.FC<OverlayProps> = (props) => {
         </div>
         <div className="movie__about">
           <h4>About {movieDetails.title}</h4>
-          <p>
-            about info here
-          </p>
+          <p><span>Director:</span> { movieDetails.director } </p>
+          <p><span>Cast:</span> { movieDetails.cast.slice(0, 10).map((item) => item + ", ") }</p>
+          <p><span>Writer(s):</span> { movieDetails.writers.map((item) => item + ", ") }</p>
+          <p><span>Genres:</span> { movieDetails.genres.map((genre) => genre.name + ', ') }</p>
+          {/* <p><span>Adjectives:</span> </p> */}
+          {/* <p><span>Maturity Rating:</span> </p> */}
         </div>
       </div>}
       <button className="button--icon-close button--icon" onClick={(event) => handleOverlayClose(event)}>&#10006;</button>

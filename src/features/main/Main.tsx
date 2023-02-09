@@ -9,6 +9,7 @@ import './Main.scss';
 import { handlePageClick, handleSliderClick, debounce } from './MainUtils';
 import { Hero } from '../hero/Hero';
 import { Overlay } from '../overlay/Overlay';
+import { trimMovieDetailResponse } from '../../scripts/utils';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
@@ -26,20 +27,12 @@ export function Main() {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates,similar")
       .then(response => response.json())
       .then(res => {
-        const similar = res.similar.results;
-        res.similar = similar;
-        const movieCast = []
-        for (let i = 0; i < 4; i++) {
-          movieCast.push(res.credits.cast[i].name);
-        }
-        res.cast = movieCast;
-        setMovieDetails(res);
+        const response = trimMovieDetailResponse(res);
+        setMovieDetails(response);
         const body = document.querySelector("body");
         (body as HTMLElement).style.setProperty("overflow", "hidden");
         const modal = document.querySelector(".modal");
-        setTimeout(() => {
-          (modal as HTMLElement).classList.add("modal--active");
-        }, 200);
+        (modal as HTMLElement).classList.add("modal--active");
       })
   }
 
@@ -54,9 +47,8 @@ export function Main() {
       setMovieDetails(undefined);
       const modal = document.querySelector(".modal");
       (modal as HTMLElement).classList.remove("modal--active");
-
-        const body = document.querySelector("body");
-        (body as HTMLElement).style.setProperty("overflow", "visible");
+      const body = document.querySelector("body");
+      (body as HTMLElement).style.setProperty("overflow", "visible");
     }
   }
 

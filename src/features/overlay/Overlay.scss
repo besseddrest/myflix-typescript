@@ -45,6 +45,7 @@
 .modal {
   z-index: 4;
   margin: auto;
+  padding-bottom: 3rem;
   text-align: left;
   color: white;
   position: relative;
@@ -52,13 +53,13 @@
   background: black;
   width: 80%;
   opacity: 0;
-  transition: opacity 200ms ease-in;
+  transition: opacity 500ms ease-in-out;
 
   &.modal--active {
     opacity: 1;
   }
 
-  .movie_sidebar {
+  .movie__sidebar {
     a {
       color: grey;
       text-decoration: none;
@@ -67,6 +68,12 @@
       &:hover {
         color: white;
       }
+    }
+  }
+
+  .movie__about {
+    span {
+      color: grey;
     }
   }
 
