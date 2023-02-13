@@ -1,8 +1,7 @@
 import { MovieDetail } from '../../types/MovieDetail';
-import { getYear } from './OverlayUtils';
 import './Overlay.scss';
 import React, { useEffect } from 'react';
-import { formatRuntime, handleMoreScrollClick } from '../../scripts/utils';
+import { formatRuntime, handleMoreScrollClick, getYear } from '../../scripts/utils';
 
 type OverlayProps = {
   movieDetailsState: [MovieDetail, React.Dispatch<React.SetStateAction<MovieDetail | null>>]
@@ -11,9 +10,12 @@ type OverlayProps = {
 export const Overlay: React.FC<OverlayProps> = ({movieDetailsState: [movieDetails, setMovieDetails]}) => {
   useEffect(() => {
     const body = document.querySelector("body");
-    (body as HTMLElement).style.setProperty("overflow", "hidden");
-    const modal = document.querySelector(".modal");
-    (modal as HTMLElement).classList.add("modal--active");
+    (body as HTMLElement).classList.add('body--disabled');
+
+    setTimeout(() => {
+      const modal = document.querySelector(".modal");
+      (modal as HTMLElement).classList.add("modal--active");
+    }, 100);
   }, [movieDetails]);
 
   const handleOverlayClose = (ev: React.MouseEvent) => {
@@ -25,8 +27,11 @@ export const Overlay: React.FC<OverlayProps> = ({movieDetailsState: [movieDetail
     if (isCloseElement) {
       const modal = document.querySelector(".modal");
       (modal as HTMLElement).classList.remove("modal--active");
-      const body = document.querySelector("body");
-      (body as HTMLElement).style.setProperty("overflow", "visible");
+      
+      setTimeout(() => {
+        const body = document.querySelector("body");
+        (body as HTMLElement).classList.remove('body--disabled');
+      }, 500);
       setMovieDetails(null);
     }
   }

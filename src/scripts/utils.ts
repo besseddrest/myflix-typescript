@@ -105,3 +105,7 @@ export const handlePageClick = (e: React.MouseEvent) => {
     (slider as HTMLElement).style.setProperty("--slider-index", (targetPage).toString());
   }
 }
+
+export const getYear = (date: string) => {
+  return date.split('-')[0];
+}

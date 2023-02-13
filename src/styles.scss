@@ -1,8 +1,26 @@
+body {
+  overflow: visible;
+
+  .overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &.body--disabled {
+    overflow: hidden;
+
+    .overlay {
+      opacity: 1;
+    }
+  }
+}
+
 a, button {
   &:hover {
     cursor: pointer;
   }
 }
+
 button {
   margin-right: .5rem;
 
