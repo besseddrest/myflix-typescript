@@ -3,7 +3,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Main } from './features/main/Main';
 import { Profiles } from './features/profiles/Profiles';
 import './App.css';
-import './styles.scss';
+import './styles/styles.scss';
 
 function App() {
   return (

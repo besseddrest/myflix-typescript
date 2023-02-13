@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 body {
   background: #262626;
   color: white;
@@ -104,13 +106,10 @@ html:not([data-scroll='0']) {
   }
 
   &__scroll {
+    @include all-center-content;
     visibility: hidden;
     width: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 3rem;
-    color: white;
     background-color: rgba(0, 0, 0, 0);
     z-index: 100;
     transition: font-size 100ms ease, background-color 100ms ease-in-out;
@@ -132,10 +131,8 @@ html:not([data-scroll='0']) {
 }
 
 .movie-card {
+  @include all-center-content;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex: 0 0 20%;
   max-height: 300px;
   max-width: 20%;
@@ -145,7 +142,6 @@ html:not([data-scroll='0']) {
     background: #141414;
     border-radius: 1rem;
     overflow: hidden;
-    color: white;
     margin: 0 auto;
     padding-bottom: 1rem;
     transform: scale(0);
@@ -169,7 +165,7 @@ html:not([data-scroll='0']) {
   }
 
   &__score {
-    color: greenyellow;
+    @include pop-font-color;
     font-weight: bold;
     margin-bottom: 1rem;
   }
@@ -180,11 +176,8 @@ html:not([data-scroll='0']) {
     justify-items: center;
 
     > div {
-      display: flex;
+      @include all-center-content;
       flex: 0 0 30px;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
       width: 30px;
       height: 30px;
       margin-right: 10px;

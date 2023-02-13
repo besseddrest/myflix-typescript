@@ -1,0 +1,10 @@
+@mixin all-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@mixin pop-font-color {
+  color: greenyellow;
+}

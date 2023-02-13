@@ -1,3 +1,6 @@
+// Sass: @import to be phased out eventually, use @use
+@import './mixins.scss';
+
 body {
   overflow: visible;
 
@@ -48,11 +51,8 @@ button {
   }
 
   &.button--icon {
-    display: flex;
+    @include all-center-content;
     flex: 0 0 34px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
     width: 34px;
     height: 34px;
     background: #4f4f4f;

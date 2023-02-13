@@ -1,9 +1,9 @@
+@import '../../styles/mixins';
+
 .overlay {
+  @include all-center-content;
   z-index: 3;
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
   padding-top: 2rem;
@@ -47,7 +47,6 @@
   margin: auto;
   padding-bottom: 3rem;
   text-align: left;
-  color: white;
   position: relative;
   border-radius: 1rem;
   background: black;
@@ -100,7 +99,7 @@
 
   .movie__ratings {
     strong {
-      color: greenyellow;
+      @include pop-font-color;
     }
   }
 
@@ -194,8 +193,8 @@
       }
 
       strong {
+        @include pop-font-color;
         display: block;
-        color: greenyellow;
       }
     }
   }
