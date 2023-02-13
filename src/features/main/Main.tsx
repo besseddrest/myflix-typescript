@@ -13,7 +13,7 @@ import { trimMovieDetailResponse } from '../../scripts/utils';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
-  const [movieDetails, setMovieDetails] = useState<MovieDetail>();
+  const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
   const [pageCounts, setPageCounts] = useState<PageCounts>({});
   const [heroMovie, setHeroMovie] = useState<HeroMovie>(Object);
 
@@ -29,27 +29,7 @@ export function Main() {
       .then(res => {
         const response = trimMovieDetailResponse(res);
         setMovieDetails(response);
-        const body = document.querySelector("body");
-        (body as HTMLElement).style.setProperty("overflow", "hidden");
-        const modal = document.querySelector(".modal");
-        (modal as HTMLElement).classList.add("modal--active");
       })
-  }
-
-  // TODO: move to Overlay component
-  const handleOverlayClose = (ev: React.MouseEvent) => {
-    const target = (ev.target as HTMLElement);
-    const isCloseElement = (target.classList.contains("overlay") || target.classList.contains("button--icon-close"))
-      ? true
-      : false;
-
-    if (isCloseElement) {
-      setMovieDetails(undefined);
-      const modal = document.querySelector(".modal");
-      (modal as HTMLElement).classList.remove("modal--active");
-      const body = document.querySelector("body");
-      (body as HTMLElement).style.setProperty("overflow", "visible");
-    }
   }
 
   useEffect(() => {
@@ -86,10 +66,10 @@ export function Main() {
       window.removeEventListener("scroll", debounce(() => handleScroll(), 200));
     }
   }, [])
-  
+
   return (
     <>
-      <Overlay handleOverlayClose={handleOverlayClose} movieDetails={movieDetails} />
+      { movieDetails ? <Overlay movieDetailsState={[movieDetails, setMovieDetails]} /> : null }
       <Hero heroMovie={heroMovie} handleMoreInfoClick={(event: React.MouseEvent) => handleMoreInfoClick(event, heroMovie.id)} />
       <div className="movie-cards__wrapper">
         {

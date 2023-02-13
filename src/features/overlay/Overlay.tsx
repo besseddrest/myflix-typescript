@@ -1,11 +1,10 @@
 import { MovieDetail } from '../../types/MovieDetail';
 import { getYear } from './OverlayUtils';
 import './Overlay.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 type OverlayProps = {
-  handleOverlayClose: Function,
-  movieDetails?: MovieDetail,
+  movieDetailsState: [MovieDetail, React.Dispatch<React.SetStateAction<MovieDetail | null>>]
 }
 
 const formatRuntime = (runtime: number | null) => {
@@ -22,12 +21,29 @@ const handleMoreClick = (ev: React.MouseEvent) => {
   (section as HTMLElement).scrollIntoView({behavior: 'smooth'})
 }
 
-const trimOverview = (overview: string) => {
-  return overview.substring(0, 120) + "...";
-}
+export const Overlay: React.FC<OverlayProps> = ({movieDetailsState: [movieDetails, setMovieDetails]}) => {
+  useEffect(() => {
+    const body = document.querySelector("body");
+    (body as HTMLElement).style.setProperty("overflow", "hidden");
+    const modal = document.querySelector(".modal");
+    (modal as HTMLElement).classList.add("modal--active");
+  }, [movieDetails]);
 
-export const Overlay: React.FC<OverlayProps> = (props) => {
-  const { handleOverlayClose, movieDetails } = props;
+  const handleOverlayClose = (ev: React.MouseEvent) => {
+    const target = (ev.target as HTMLElement);
+    const isCloseElement = (target.classList.contains("overlay") || target.classList.contains("button--icon-close"))
+      ? true
+      : false;
+  
+    if (isCloseElement) {
+      const modal = document.querySelector(".modal");
+      (modal as HTMLElement).classList.remove("modal--active");
+      const body = document.querySelector("body");
+      (body as HTMLElement).style.setProperty("overflow", "visible");
+      setMovieDetails(null);
+    }
+  }
+
   return (<div onClick={(event) => handleOverlayClose(event)} className={movieDetails ? "overlay overlay--active" : "overlay"}>
     <div className="modal">
       <div className="modal__hero">

@@ -34,7 +34,6 @@ export const trimMovieDetailResponse = (res: any) => {
   for (let i = 0; i < res.release_dates.results.length; i++) {
     const entry = res.release_dates.results[i];
     if (entry.iso_3166_1 == 'US' && entry.release_dates.length > 0) {
-      console.log(entry);
       rating = entry.release_dates[0].certification;
       break;
     }

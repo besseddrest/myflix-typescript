@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>MyFlix</h1>
+        <h1><a href="/">MyFlix</a></h1>
         <ul className="app-menu">
           <li><Link to="/browse">Browse</Link></li>
         </ul>
