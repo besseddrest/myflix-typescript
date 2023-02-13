@@ -2,23 +2,10 @@ import { MovieDetail } from '../../types/MovieDetail';
 import { getYear } from './OverlayUtils';
 import './Overlay.scss';
 import React, { useEffect } from 'react';
+import { formatRuntime, handleMoreScrollClick } from '../../scripts/utils';
 
 type OverlayProps = {
   movieDetailsState: [MovieDetail, React.Dispatch<React.SetStateAction<MovieDetail | null>>]
-}
-
-const formatRuntime = (runtime: number | null) => {
-  if (runtime) {
-    const hours = Math.floor(runtime / 60).toString();
-    const mins = (runtime % 60).toString();
-    return hours + "h " + mins + "m";
-  }
-}
-
-const handleMoreClick = (ev: React.MouseEvent) => {
-  ev.preventDefault();
-  const section = document.querySelector(".movie__about");
-  (section as HTMLElement).scrollIntoView({behavior: 'smooth'})
 }
 
 export const Overlay: React.FC<OverlayProps> = ({movieDetailsState: [movieDetails, setMovieDetails]}) => {
@@ -69,7 +56,7 @@ export const Overlay: React.FC<OverlayProps> = ({movieDetailsState: [movieDetail
               {movieDetails.cast.slice(0, 4).map((name, i) => <span key={i}>{name}{
                 (i < 3) 
                   ? ', ' 
-                  : <span>&nbsp;<a href="#" onClick={(event) => handleMoreClick(event)}>more...</a></span>}</span>
+                  : <span>&nbsp;<a href="#" onClick={(event) => handleMoreScrollClick(event)}>more...</a></span>}</span>
                 )
               }
             </p>

@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React, { useState, useEffect, ReactText } from 'react';
 import { Movie } from '../../types/Movie';
 import { MovieDetail } from '../../types/MovieDetail';
@@ -6,22 +5,15 @@ import { MovieLists } from '../../types/MovieLists';
 import { PageCounts } from '../../types/PageCounts';
 import { HeroMovie } from '../../types/HeroMovie';
 import './Main.scss';
-import { handlePageClick, handleSliderClick, debounce } from './MainUtils';
 import { Hero } from '../hero/Hero';
 import { Overlay } from '../overlay/Overlay';
-import { trimMovieDetailResponse } from '../../scripts/utils';
+import { trimMovieDetailResponse, handleScroll, debounce, handlePageClick, handleSliderClick } from '../../scripts/utils';
 
 export function Main() {
   const [movieLists, setMovieLists] = useState<MovieLists>({now_playing: [], top_rated: []});
   const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
   const [pageCounts, setPageCounts] = useState<PageCounts>({});
   const [heroMovie, setHeroMovie] = useState<HeroMovie>(Object);
-
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY.toString();
-    const scrollElement = document.querySelector('html');
-    (scrollElement as HTMLElement).dataset.scroll = scrollPosition;
-  }
 
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates,similar")
