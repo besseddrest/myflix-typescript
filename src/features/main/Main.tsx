@@ -19,8 +19,7 @@ export function Main() {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates,similar")
       .then(response => response.json())
       .then(res => {
-        const response = trimMovieDetailResponse(res);
-        setMovieDetails(response);
+        setMovieDetails(trimMovieDetailResponse(res));
       })
   }
 
@@ -28,27 +27,26 @@ export function Main() {
     window.addEventListener("scroll", debounce(() => handleScroll(), 200), { passive: true });
     // fetch movie lists: "Now In Theaters", "Top Rated"
     const fetchData = async () => {
-      const nowPlaying = await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
+      let hero: HeroMovie = {} as HeroMovie;
+      const lists: { now_playing: Movie[], top_rated: Movie[] } = { now_playing: [], top_rated: [] };
+      await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
         .then(response => response.json())
         .then(res => {
-          setHeroMovie(res.results[0]);
-          return res.results;
-        });
-
-      const topRated = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
-        .then(response => response.json())
-        .then(res => {
-          return res.results;
+          hero = res.results[0];
+          lists.now_playing = res.results;
         })
-
-      setMovieLists({
-        now_playing: nowPlaying,
-        top_rated: topRated,
-      });
-
+        .then(async () => { 
+          await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
+            .then(response => response.json())
+            .then(res => {
+              lists.top_rated = res.results;
+        })});
+      
+      setHeroMovie(hero);
+      setMovieLists(lists);
       setPageCounts({
-        now_playing: nowPlaying.length / 5,
-        top_rated: topRated.length / 5,
+        now_playing: lists.now_playing.length / 5,
+        top_rated: lists.top_rated.length / 5,
       });
     }
 
