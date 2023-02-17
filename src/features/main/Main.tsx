@@ -14,6 +14,7 @@ export function Main() {
   const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
   const [pageCounts, setPageCounts] = useState<PageCounts>({});
   const [heroMovie, setHeroMovie] = useState<HeroMovie>(Object);
+  const [loading, setLoading] = useState(false);
 
   const handleMoreInfoClick = (ev: React.MouseEvent, id: number) => {
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&append_to_response=credits,release_dates,similar")
@@ -23,33 +24,37 @@ export function Main() {
       })
   }
 
-  useEffect(() => {
-    window.addEventListener("scroll", debounce(() => handleScroll(), 200), { passive: true });
-    // fetch movie lists: "Now In Theaters", "Top Rated"
-    const fetchData = async () => {
-      let hero: HeroMovie = {} as HeroMovie;
-      const lists: { now_playing: Movie[], top_rated: Movie[] } = { now_playing: [], top_rated: [] };
+  const fetchData = async () => {
+    let hero: HeroMovie = {} as HeroMovie;
+    const lists: { now_playing: Movie[], top_rated: Movie[] } = { now_playing: [], top_rated: [] };
+    try {
       await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
-        .then(response => response.json())
-        .then(res => {
-          hero = res.results[0];
-          lists.now_playing = res.results;
-        })
-        .then(async () => { 
-          await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
-            .then(response => response.json())
-            .then(res => {
-              lists.top_rated = res.results;
-        })});
-      
-      setHeroMovie(hero);
-      setMovieLists(lists);
-      setPageCounts({
-        now_playing: lists.now_playing.length / 5,
-        top_rated: lists.top_rated.length / 5,
-      });
+      .then(response => response.json())
+      .then(res => {
+        hero = res.results[0];
+        lists.now_playing = res.results;
+      })
+      .then(async () => { 
+        await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=ddb9cdf5d7e5e833c1ace354ee4baa49&language=en-US&page=1')
+          .then(response => response.json())
+          .then(res => {
+            lists.top_rated = res.results;
+      })});
+    } catch (e) {
+      console.error(e);
     }
 
+    setHeroMovie(hero);
+    setMovieLists(lists);
+    setPageCounts({
+      now_playing: lists.now_playing.length / 5,
+      top_rated: lists.top_rated.length / 5,
+    });
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", debounce(() => handleScroll(), 200), { passive: true });
+    // fetches movie lists: "Now In Theaters", "Top Rated"
     fetchData();
 
     return () => {
